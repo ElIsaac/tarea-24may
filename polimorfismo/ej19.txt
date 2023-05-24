@@ -1,0 +1,6 @@
+se definen las tablas virtuales para las clases Derivada y Base en las secciones .data.rel.ro.local._ZTV8Derivada 
+y .data.rel.ro.local._ZTV4Base, respectivamente. Estas tablas contienen punteros a las funciones mostrar() de cada clase.
+
+Además, en las definiciones de constructor de las clases Base y Derivada, se puede observar que se establecen los punteros a 
+las tablas virtuales correspondientes utilizando la instrucción movq %rdx, (%rax). Esto permite que los objetos de estas clases accedan 
+a las funciones virtuales adecuadas en tiempo de ejecución.

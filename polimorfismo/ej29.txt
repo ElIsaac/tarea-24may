@@ -1,0 +1,27 @@
+En la función _ZN1XC2Ev (constructor de la clase X):
+
+leaq	16+_ZTV1X(%rip), %rdx
+movq	-8(%rbp), %rax
+movq	%rdx, (%rax)
+En la función _ZN1YC2Ev (constructor de la clase Y):
+
+
+leaq	16+_ZTV1Y(%rip), %rdx
+movq	-24(%rbp), %rax
+movq	%rdx, (%rax)
+
+
+leaq 16+_ZTV1X(%rip), %rdx: Esta instrucción calcula la dirección efectiva de la tabla de funciones virtuales (vtable)
+ de la clase X y la carga en el registro %rdx. 16+_ZTV1X(%rip) representa la dirección de la vtable de la clase X 
+ más un desplazamiento de 16 bytes. %rip es el registro de instrucción que contiene la dirección de la siguiente instrucción. 
+ Por lo tanto, esta instrucción carga en %rdx la dirección de la vtable de X.
+
+movq -8(%rbp), %rax: Esta instrucción mueve el valor almacenado en la dirección de memoria apuntada por %rbp - 8 al registro %rax. 
+%rbp es el puntero de base de la pila, que generalmente se utiliza para acceder a las variables locales en el ensamblador. %rbp - 8 
+es una dirección en la pila donde se encuentra almacenado un puntero a un objeto de la clase X. Por lo tanto, esta instrucción mueve 
+el puntero del objeto X al registro %rax.
+
+movq %rdx, (%rax): Esta instrucción mueve el valor contenido en el registro %rdx a la dirección de memoria apuntada por %rax. 
+En este caso, %rdx contiene la dirección de la vtable de X obtenida anteriormente, y %rax contiene el puntero al objeto de X. 
+Por lo tanto, esta instrucción guarda la dirección de la vtable en el primer campo de memoria del objeto de X, 
+que es donde se espera encontrar la vtable en C++.
